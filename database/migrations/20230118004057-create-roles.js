@@ -9,9 +9,8 @@ module.exports = {
         {
           id: {
             allowNull: false,
-            autoIncrement: true,
             primaryKey: true,
-            type: Sequelize.BIGINT,
+            type: Sequelize.UUID,
           },
 
           name: {
@@ -22,11 +21,13 @@ module.exports = {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'created_at',
+            defaultValue: new Date()
           },
           updatedAt: {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'updated_at',
+            defaultValue: new Date()
           },
         },
         { transaction }

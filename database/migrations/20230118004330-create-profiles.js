@@ -17,7 +17,7 @@ module.exports = {
           },
 
           user_id: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.UUID,
             foreignKey: true,
             references: {
               model: 'users',
@@ -27,7 +27,7 @@ module.exports = {
             onDelete: 'CASCADE',
           },
           role_id: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.UUID,
             foreignKey: true,
             references: {
               model: 'roles',
@@ -38,15 +38,19 @@ module.exports = {
           },
           image_url: {
             type: Sequelize.STRING,
+            validate: {
+              isUrl: true
+            }
           },
           code_phone: {
             type: Sequelize.INTEGER,
           },
           phone: {
             type: Sequelize.INTEGER,
+            unique: true
           },
           country_id: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.UUID,
             foreignKey: true,
             references: {
               model: 'countries',
@@ -59,11 +63,13 @@ module.exports = {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'created_at',
+            defaultValue: new Date()
           },
           updatedAt: {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'updated_at',
+            defaultValue: new Date()
           },
         },
         { transaction }

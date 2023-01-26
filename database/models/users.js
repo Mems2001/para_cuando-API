@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Users.belongsTo(models.Profiles, {
-        foreignKey: 'id',
+      Users.hasMany(models.Profiles, {
+        foreignKey: 'user_id',
         // targetKey: 'user_id',
       })
     }
@@ -18,11 +18,9 @@ module.exports = (sequelize, DataTypes) => {
   Users.init(
     {
       id: {
-        // usando Serial
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.BIGINT, // Puede ser Integer o BigInt -> BigInt es mejor
+        type: DataTypes.UUID, 
       },
       first_name: {
         type: DataTypes.STRING,

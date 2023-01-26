@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Publications_types.belongsTo(models.Publications, {
-        foreignKey: 'id',
+      Publications_types.hasMany(models.Publications, {
+        foreignKey: 'publication_type_id',
         // targetKey: 'publication_type_id',
       })
     }
@@ -19,9 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.BIGINT,
+        type: DataTypes.UUID,
       },
       name: {
         type: DataTypes.STRING,

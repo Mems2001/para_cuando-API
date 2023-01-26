@@ -1,7 +1,7 @@
 'use strict'
 const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  class State extends Model {
+  class States extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,17 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      State.hasMany(models.Countries, { foreignKey: 'country_id' })
-      State.hasMany(models.Cities, { foreignKey: 'city_id' })
+      States.belongsTo(models.Countries, { foreignKey: 'country_id' })
+      States.hasMany(models.Cities, { foreignKey: 'city_id' })
     }
   }
-  State.init(
+  States.init(
     {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
       },
       name: {
         type: DataTypes.STRING,
@@ -27,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
       },
       country_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         foreignKey: true,
         references: {
@@ -36,26 +35,15 @@ module.exports = (sequelize, DataTypes) => {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-      },
-      city_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        foreignKey: true,
-        references: {
-          model: 'cities',
-          key: 'id',
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
+      }
     },
     {
       sequelize,
-      modelName: 'State',
-      tableName: 'state',
+      modelName: 'States',
+      tableName: 'states',
       underscored: true,
       timestamps: true,
     }
   )
-  return State
+  return States
 }

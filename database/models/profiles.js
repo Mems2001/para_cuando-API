@@ -9,13 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Profiles.hasMany(models.Users, { foreignKey: 'id' })
-      Profiles.hasMany(models.Roles, { foreignKey: 'id' })
-      Profiles.hasOne(models.Countries, { foreignKey: 'id' })
+      Profiles.belongsTo(models.Users, { foreignKey: 'user_id' })
+      Profiles.belongsTo(models.Roles, { foreignKey: 'role_id' })
+      Profiles.belongsTo(models.Countries, { foreignKey: 'country_id' })
       Profiles.belongsToMany(models.Publications, {
         as: 'profile',
         through: models.Votes,
         uniqueKey: false,
+        foreignKey: 'profile_id'
       })
     }
   }
@@ -29,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
       },
 
       user_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         foreignKey: true,
         references: {
           model: 'users',
@@ -39,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
       },
       role_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         foreignKey: true,
         references: {
           model: 'roles',
@@ -50,6 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       image_url: {
         type: DataTypes.STRING,
+        validate: {isUrl:true}
       },
       code_phone: {
         type: DataTypes.INTEGER,
@@ -58,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       country_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         foreignKey: true,
         references: {
           model: 'countries',

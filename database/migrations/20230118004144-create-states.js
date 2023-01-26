@@ -9,9 +9,8 @@ module.exports = {
         {
           id: {
             allowNull: false,
-            autoIncrement: true,
             primaryKey: true,
-            type: Sequelize.INTEGER,
+            type: Sequelize.UUID,
           },
           name: {
             type: Sequelize.STRING,
@@ -19,20 +18,10 @@ module.exports = {
             unique: true,
           },
           country_id: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.UUID,
             foreignKey: true,
             references: {
               model: 'countries',
-              key: 'id',
-            },
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE',
-          },
-          city_id: {
-            type: Sequelize.INTEGER,
-            foreignKey: true,
-            references: {
-              model: 'cities',
               key: 'id',
             },
             onUpdate: 'CASCADE',
@@ -42,11 +31,13 @@ module.exports = {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'created_at',
+            defaultValue: new Date()
           },
           updatedAt: {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'updated_at',
+            defaultValue: new Date()
           },
         },
         { transaction }

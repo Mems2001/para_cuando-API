@@ -2,6 +2,9 @@ const models = require('../database/models')
 const { Op } = require('sequelize')
 const { CustomError } = require('../utils/custom-error')
 
+const rolesServices = require('../services/roles.service')
+const rolesService = new rolesServices()
+
 class ProfilesService {
   constructor() {}
 
@@ -122,6 +125,32 @@ class ProfilesService {
       await transaction.rollback()
       throw error
     }
+  }
+
+  // For middlewares <---------
+  async verifyAdmin(user_id) {
+    try {
+      const profiles = await models.Profiles.findAll({
+        where: {
+          user_id
+        }
+      })
+      
+      const admin = await rolesService.findRoleByName('admin')
+      
+      for (let profile of profiles) {
+        if (admin.id === profile.role_id) {
+          return true
+        }
+      }
+    
+      return false
+  
+    } catch (error) {
+      console.log(error)
+      return false
+    }
+  
   }
 }
 

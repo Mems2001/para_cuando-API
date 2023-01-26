@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Roles.belongsTo(models.Profiles, {
-        foreignKey: 'id',
+      Roles.hasMany(models.Profiles, {
+        foreignKey: 'role_id',
         // targetKey: 'role_id',
       })
     }
@@ -19,9 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.BIGINT,
+        type: DataTypes.UUID,
       },
 
       name: {

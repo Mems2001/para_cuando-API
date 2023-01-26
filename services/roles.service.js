@@ -103,6 +103,15 @@ class RolesService {
       throw error
     }
   }
+
+  // For seeders <------------
+  async findRoleByName(name) {
+    return await models.Roles.findOne({
+      where: {
+        name
+      }
+    })
+  }
 }
 
 module.exports = RolesService

@@ -8,11 +8,9 @@ module.exports = {
         'votes',
         {
           id: {
-            // usando Serial
             allowNull: false,
-            autoIncrement: true,
             primaryKey: true,
-            type: Sequelize.BIGINT, // Puede ser Integer o BigInt -> BigInt es mejor
+            type: Sequelize.UUID
           },
           publication_id: {
             type: Sequelize.UUID,
@@ -40,11 +38,13 @@ module.exports = {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'created_at',
+            defaultValue: new Date()
           },
           updatedAt: {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'updated_at',
+            defaultValue: new Date()
           },
         },
         { transaction }

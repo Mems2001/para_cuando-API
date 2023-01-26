@@ -73,6 +73,15 @@ const removeUser = async (request, response, next) => {
     next(error)
   }
 }
+const findUserByEmail = async (request, response, next) => {
+  try {
+    let { email } = request.body
+    let user = await usersService.findUserByEmail(email)
+    return response.json({ results: user })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 module.exports = {
   getUsers,
@@ -80,4 +89,5 @@ module.exports = {
   getUser,
   updateUser,
   removeUser,
+  findUserByEmail,
 }

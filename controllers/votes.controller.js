@@ -1,7 +1,9 @@
 const VotesService = require('../services/votes.service')
+const PublicationsService = require('../services/publications.service')
 const { getPagination, getPagingData } = require('../utils/sequelize-utils')
 
 const votesService = new VotesService()
+const publicationsService = new PublicationsService()
 
 const getVotes = async (request, response, next) => {
   try {
@@ -67,6 +69,12 @@ const removeVote = async (request, response, next) => {
   } catch (error) {
     next(error)
   }
+}
+
+const publicationByVote = async (request, response, next) => {
+  const publicationId = request.publication_id
+  const { voteId } = request.params
+  const aux = await publicationsService.createPublication
 }
 
 module.exports = {

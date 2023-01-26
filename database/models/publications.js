@@ -9,16 +9,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Publications.belongsToMany(models.Votes, {
+      Publications.belongsToMany(models.Profiles, {
         as: 'publication',
         through: models.Votes,
         uniqueKey: false,
+        foreignKey: 'profile_id'
       })
-      Publications.hasMany(models.Profiles, { foreignKey: 'profile_id' })
-      Publications.hasMany(models.Publications_types, {
-        foreignKey: 'id',
+      Publications.belongsTo(models.Profiles, { foreignKey: 'profile_id' })
+      Publications.belongsTo(models.Publications_types, {
+        foreignKey: 'publication_type_id',
       })
-      Publications.hasMany(models.Cities, { foreignKey: 'city_id' })
+      Publications.belongsTo(models.Cities, { foreignKey: 'city_id' })
     }
   }
   Publications.init(
@@ -81,6 +82,9 @@ module.exports = (sequelize, DataTypes) => {
       image_url: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isUrl: true
+        }
       },
     },
     {

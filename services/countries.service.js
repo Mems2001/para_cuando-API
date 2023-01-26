@@ -103,6 +103,15 @@ class CountriesService {
       throw error
     }
   }
+
+  // For seeders <-----------
+  async findCountryByName(name) {
+    return await models.Countries.findOne({
+      where: {
+        name
+      }
+    })
+  }
 }
 
 module.exports = CountriesService

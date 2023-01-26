@@ -27,14 +27,14 @@ class StatesService {
     //Necesario para el findAndCountAll de Sequelize
     options.distinct = true
 
-    const states = await models.State.findAndCountAll(options)
+    const states = await models.States.findAndCountAll(options)
     return states
   }
 
   async createState({ name, country_id, city_id }) {
     const transaction = await models.sequelize.transaction()
     try {
-      let newState = await models.State.create(
+      let newState = await models.States.create(
         {
           name,
           country_id,
@@ -52,7 +52,7 @@ class StatesService {
   }
   //Return Instance if we do not converted to json (or raw:true)
   async getStateOr404(id) {
-    let state = await models.State.findByPk(id)
+    let state = await models.States.findByPk(id)
 
     if (!state) throw new CustomError('Not found State', 404, 'Not Found')
 
@@ -61,14 +61,14 @@ class StatesService {
 
   //Return not an Instance raw:true | we also can converted to Json instead
   async getState(id) {
-    let state = await models.State.findByPk(id, { raw: true })
+    let state = await models.States.findByPk(id, { raw: true })
     return state
   }
 
   async updateState(id, { name, country_id, city_id }) {
     const transaction = await models.sequelize.transaction()
     try {
-      let state = await models.State.findByPk(id)
+      let state = await models.States.findByPk(id)
 
       if (!state) throw new CustomError('Not found state', 404, 'Not Found')
 
@@ -93,7 +93,7 @@ class StatesService {
   async removeState(id) {
     const transaction = await models.sequelize.transaction()
     try {
-      let state = await models.State.findByPk(id)
+      let state = await models.States.findByPk(id)
 
       if (!state) throw new CustomError('Not found state', 404, 'Not Found')
 
@@ -106,6 +106,15 @@ class StatesService {
       await transaction.rollback()
       throw error
     }
+  }
+
+  // For seeders <-------------
+  async findStateByName(name) {
+    return await models.States.findOne({
+      where: {
+        name
+      }
+    })
   }
 }
 

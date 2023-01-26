@@ -14,11 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   Votes.init(
     {
       id: {
-        // usando Serial
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.BIGINT, // Puede ser Integer o BigInt -> BigInt es mejor
+        type: DataTypes.UUID
       },
       publication_id: {
         type: DataTypes.UUID,

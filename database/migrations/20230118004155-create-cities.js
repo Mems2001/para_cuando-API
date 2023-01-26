@@ -9,30 +9,34 @@ module.exports = {
         {
           id: {
             allowNull: false,
-            autoIncrement: true,
             primaryKey: true,
-            type: Sequelize.BIGINT,
+            type: Sequelize.UUID,
           },
-          country_id: {
-            type: Sequelize.INTEGER,
+          state_id: {
+            type: Sequelize.UUID,
             foreignKey: true,
             references: {
-              model: 'countries',
+              model: 'states',
               key: 'id',
             },
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE',
           },
           name: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING ,
+            allowNull: false
           },
           createdAt: {
             allowNull: false,
             type: Sequelize.DATE,
+            defaultValue: new Date() ,
+            field: 'created_at'
           },
           updatedAt: {
             allowNull: false,
             type: Sequelize.DATE,
+            defaultValue: new Date() ,
+            field: 'updated_at'
           },
         },
         { transaction }

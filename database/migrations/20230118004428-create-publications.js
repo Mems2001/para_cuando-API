@@ -25,7 +25,7 @@ module.exports = {
             onDelete: 'CASCADE',
           },
           publication_type_id: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.UUID,
             foreignKey: true,
             allowNull: false,
             references: {
@@ -53,7 +53,7 @@ module.exports = {
             allowNull: false,
           },
           city_id: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.UUID,
             allowNull: false,
             foreignKey: true,
             references: {
@@ -66,16 +66,21 @@ module.exports = {
           image_url: {
             type: Sequelize.STRING,
             allowNull: false,
+            validate: {
+              isUrl: true
+            }
           },
           createdAt: {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'created_at',
+            defaultValue: new Date()
           },
           updatedAt: {
             allowNull: false,
             type: Sequelize.DATE,
             field: 'updated_at',
+            defaultValue: new Date()
           },
         },
         { transaction }

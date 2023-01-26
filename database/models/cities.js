@@ -9,14 +9,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Cities.hasMany(models.Countries, { foreignKey: 'id' })
-      Cities.belongsTo(models.Publications, {
-        foreignKey: 'id',
+      Cities.hasMany(models.Publications, {
+        foreignKey: 'city_id',
         // targetKey: 'city_id',
       })
 
-      Cities.belongsTo(models.State, {
-        foreignKey: 'id',
+      Cities.belongsTo(models.States, {
+        foreignKey: 'state_id',
         // targetKey: 'city_id',
       })
     }
@@ -25,15 +24,14 @@ module.exports = (sequelize, DataTypes) => {
     {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.BIGINT,
+        type: DataTypes.UUID,
       },
-      country_id: {
-        type: DataTypes.INTEGER,
+      state_id: {
+        type: DataTypes.UUID,
         foreignKey: true,
         references: {
-          model: 'countries',
+          model: 'states',
           key: 'id',
         },
         onUpdate: 'CASCADE',
@@ -41,6 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: {
         type: DataTypes.STRING,
+        allowNull: false
       },
     },
     {

@@ -1,6 +1,7 @@
 'use strict'
 require('dotenv').config()
 module.exports = {
+  api: { jwtSecret: process.env.JWT_SECRET },
   development: {
     use_env_variable: 'DATABASE_URI_DEV',
     define: {
@@ -48,6 +49,7 @@ module.exports = {
       updatedAt: 'updated_at',
       deletedAt: 'deleted_at',
     },
+
     timezone: 'UTC',
   },
 }
