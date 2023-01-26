@@ -16,7 +16,6 @@ const {
  *    States:
  *      type: object
  *      properties: 
- *        country_id: integer
  *        name: 
  *          type: varchar
  *          description: get the states

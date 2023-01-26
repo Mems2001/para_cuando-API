@@ -16,16 +16,16 @@ const {
  *    Cities:
  *      type: object
  *      properties: 
- *        state_id: integer
  *        name: 
  *          type: varchar
  *          description: get the cities
  *      required: false
+ *      
  */
 
 /**
  * @swagger
- * /cities
+ * api/cities
  *  get:
  *    summary: get all the cities
  *    tags: [States] 
@@ -38,11 +38,6 @@ const {
                 type: array
                 items:
                   $ref: '#/components/schemas/Cities'          
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Cities'
         '400':
           description: Invalid city
  *        

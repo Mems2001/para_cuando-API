@@ -56,7 +56,50 @@ const {
 router.get('/publications-types', getPublicationsTypes)
 
 router.post('/', addPublicationType)
+
+/**
+ * @swagger
+ * components: 
+ *  schemas:
+ *    PublicationsTypesByID:
+ *      type: object
+ *      properties: 
+ *        name: 
+ *          type: varchar
+ *          description: the publications types by id
+ *        description:  
+ *          type: varchar
+ *          description: the description of the publications types by id
+ *      required: false
+ *     
+ */
+
+/**
+ * @swagger
+ * /:publication_type_id
+ *  get:
+ *    summary: get publications by id
+ *    tags: [PublicationsTypesByID] 
+ *    responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicationsTypesByID'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PublicationsTypesByID'
+        '400':
+          description: Invalid publication type
+ *        
+ */
 router.get('/:publication_type_id', getPublicationType)
+
 router.put('/:id', updatePublicationType)
 router.delete('/:id', removePublicationType)
 

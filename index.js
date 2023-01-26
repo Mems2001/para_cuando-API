@@ -17,12 +17,14 @@ const swaggerSpecs = {
     openapi: '3.0.3',
     info: {
       title: 'Para Cuando API',
-      version: '1.0.0'
+      version: '1.0.0',
+      description: 'Documentacion de la API "Para Cuando" del grupo numero 5(CODELOPERS) de la generacion 18 de Academlo.'
     },
+    summary: 'Documentacion de la API Para Cuando del grupo numero 5 de la generacion 18',
     servers: [
       {
         url: 'http://localhost:8000'
-      }
+      },
     ]
   },
   // para agregar todas las rutas.
