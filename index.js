@@ -7,6 +7,27 @@ const db = require('./database/models')
 const app = express()
 const PORT = process.env.PORT || 8000
 const authRouter = require('./routes/auth.routes')
+const path = require('path')
+
+// swagger para la documentacion.
+const swaggerUI = require('swagger-ui-express')
+const swaggerJsDoc = require('swagger-jsdoc')
+const swaggerSpecs = {
+  definition: {
+    openapi: '3.0.3',
+    info: {
+      title: 'Para Cuando API',
+      version: '1.0.0'
+    },
+    servers: [
+      {
+        url: 'http://localhost:8000'
+      }
+    ]
+  },
+  // para agregar todas las rutas.
+  apis: [`${path.join(__dirname, './routes/*.js')}`]
+}
 
 ///arriba
 /*
@@ -47,6 +68,7 @@ Routes
 //
 
 app.use('/api/v1/auth', authRouter)
+app.use('/api-doc', swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpecs)))
 
 //
 

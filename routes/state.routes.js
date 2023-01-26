@@ -9,7 +9,46 @@ const {
   removeState,
 } = require('../controllers/state.controller')
 
-router.get('/', getStates)
+/**
+ * @swagger
+ * components: 
+ *  schemas:
+ *    States:
+ *      type: object
+ *      properties: 
+ *        country_id: integer
+ *        name: 
+ *          type: varchar
+ *          description: get the states
+ *      required: false
+ */
+
+/**
+ * @swagger
+ * /states
+ *  get:
+ *    summary: get all the states
+ *    tags: [States] 
+ *    responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/States'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/States'
+        '400':
+          description: Invalid state
+ *        
+ */
+router.get('/states', getStates)
+
 router.post('/', addState)
 router.get('/:id', getState)
 router.put('/:id', updateState)
