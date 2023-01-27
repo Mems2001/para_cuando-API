@@ -8,7 +8,7 @@ const {
   getUsers,
   addUser,
   getUser,
-  updateUser,
+  putUser,
   removeUser,
 } = require('../controllers/users.controller')
 
@@ -29,7 +29,7 @@ router.get('/user-info' , passportJWT.authenticate('jwt' , {session:false}) , ge
 
 router.route('/:user_id')
   .get(getUser)
-  .put(passportJWT.authenticate('jwt' , {session: false}) , updateUser)
+  .put(passportJWT.authenticate('jwt' , {session: false}) , putUser)
   .delete(passportJWT.authenticate('jwt' , {session: false}) , removeUser)
 
 // router.get('/users', getUser)

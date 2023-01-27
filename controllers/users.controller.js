@@ -72,7 +72,7 @@ const getUser = async (request, response, next) => {
     })
 }
 
-const updateUser = async (request, response, next) => {
+const putUser = async (request, response, next) => {
   try {
     const id = request.params.user_id
     const altId = request.user.id
@@ -148,7 +148,7 @@ module.exports = {
   getUsers,
   addUser,
   getUser,
-  updateUser,
+  putUser,
   removeUser,
   findUserByEmail,
 }

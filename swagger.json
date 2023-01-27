@@ -54,6 +54,7 @@
           }
         }
       },
+
       "/publications_types/{publication_type_id}": {
         "get": {
           "tags": [
@@ -93,6 +94,7 @@
           }
         }
       },
+
       "/publications": {
         "get": {
           "tags": [
@@ -158,6 +160,7 @@
           }
         }
       },
+
       "/publications/{publication_id}": {
         "get": {
           "tags": [
@@ -194,6 +197,7 @@
           }
         }
       },
+
       "/users": {
         "post": {
           "tags": [
@@ -223,7 +227,7 @@
             }
           },
           "responses": {
-            "default": {
+            "201": {
               "description": "successful operation",
               "content": {
                 "application/json": {
@@ -241,6 +245,7 @@
           }
         }
       },
+
       "/users/{user_id}": {
         "get": {
           "tags": [
@@ -279,10 +284,44 @@
               "description": "User not found"
             }
           }
-        }
-      },
+        } ,
+        "put": {
+          "tags":[
+            "user"
+          ] ,
+          "summary": "Update user" ,
+          "description": "Update a user by its ID, only avaliable for the user owner and user must be logged" ,
+          "operationId" : "putUser" ,
+          "parameters": [
+            {
+              "name": "user_id" ,
+              "in": "path" ,
+              "required": true
+            }
+          ] ,
+          "responses": {
+            "200": {
+              "description": "successful operation" ,
+              "content": {
+                  "application/json": {
+                    "type": "object",
+                    "schema": {
+                      "$ref": "#/components/schemas/users"
+                    }
+                  },
+                  "application/xml": {
+                    "type": "object",
+                    "schema": {
+                      "$ref": "#/components/schemas/users"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
       
-      "/users/:user_id/publications": {
+      "/users/{user_id}/publications": {
         "get": {
           "tags": [
             "user"
@@ -322,8 +361,10 @@
             }
           }
         }
-      }
+      } 
     },
+    
+  
     "components": {
       "schemas": {
         "users": {
@@ -535,5 +576,6 @@
           }
         }
       }
-  }
+    }
+  
 }
